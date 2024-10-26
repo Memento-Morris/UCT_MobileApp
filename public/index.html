@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UCT Mobile App Redesign</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="bg-primary text-white text-center p-4">
+        <h1>UCT Mobile App Proposed Prototype</h1>
+        <div class="login-info">
+            <p>Welcome, <span id="username">Morris Nkomo</span></p>
+            <button class="btn btn-danger" id="logout">Logout</button>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <section class="dashboard mb-4">
+            <h2>Your Dashboard</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Upcoming Classes
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Math 101 - Mon 10:00 AM</li>
+                            <li class="list-group-item">Biology 202 - Tue 2:00 PM</li>
+                            <li class="list-group-item">History 303 - Wed 1:00 PM</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Assignments
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Math Homework - Due: Thu</li>
+                            <li class="list-group-item">Biology Lab Report - Due: Fri</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Events
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Campus Tour - Oct 15</li>
+                            <li class="list-group-item">Student Union Meeting - Oct 20</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="calendar-reminder">
+            <h2>Integrated Calendar & Reminders</h2>
+            <div id="calendar"></div>
+            <div class="mt-3">
+                <h4>Add Reminder</h4>
+                <input type="text" id="reminder" class="form-control" placeholder="Enter reminder...">
+                <button class="btn btn-success mt-2" id="addReminder">Add</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-primary text-white text-center p-3 mt-4">
+        <p>&copy; 2024 UCT Mobile App. All rights reserved.</p>
+    </footer>
+
+    <!-- jQuery, Bootstrap JS, and FullCalendar JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                editable: true,
+                events: [] // You can add initial events here
+            });
+            calendar.render();
+
+            document.getElementById('addReminder').addEventListener('click', function () {
+                const reminderInput = document.getElementById('reminder').value;
+                if (reminderInput) {
+                    // Add an event to the calendar
+                    calendar.addEvent({
+                        title: reminderInput,
+                        start: new Date(), // Default to today
+                        allDay: true
+                    });
+                    document.getElementById('reminder').value = ''; // Clear input
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
